@@ -4,192 +4,79 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CDN Link -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
     <title>Tax Calculator</title>
   </head>
   <body>
-    <h1>Calculator</h1>
+    <form class="container">
+      <div class="row align-items-center" style="height: 100vh">
+        <div class="mx-auto col-10 col-md-8 col-lg-4 border border-black">
+          <div class="d-flex justify-content-center">
+            <h1>Tax Calculator</h1>
+          </div>
 
-    <form action="">
-      <div>
-        <label for="rate">Rate: </label> 
-      </br>
-        <input type="number" name="" id="rate" value="0.00" "/> 
-      </br>
+          <div>
+            <label class="form-label" for="quantity">Quantity: </label>
+            <input class="form-control" type="number" id="quantity" value="0" />
+          </div>
 
-        <label for="quantity">Quantity: </label> 
-      </br>
-        <input type="number" name="" id="quantity" value="0"/> 
-      </br>
+          <div>
+            <label class="form-label" for="rate">Rate: </label>
+            <input class="form-control" id="rate" type="number" value="0.00" />
+          </div>
 
-      <label for="gstRates">GST Rate(%)</label>
-      <select name="gstRates" id="gstRates">
-        <option value="5">5 %</option>
-        <option value="12">12 %</option>
-        <option value="18">18 %</option>
-        <option value="28">28 %</option>
-      </select>
+          <div>
+            <label class="form-label" for="gstRates">GST Rate(%)</label>
+            <select class="form-select" name="gstRates" id="gstRates">
+              <option value="0">0 %</option>
+              <option selected value="5">5 %</option>
+              <option value="12">12 %</option>
+              <option value="18">18 %</option>
+              <option value="28">28 %</option>
+            </select>
+          </div>
 
-      <br>
+          <div>
+            <label class="form-label" for="gross">Gross: </label>
+            <input class="form-control" readonly id="gross" value="₹ 0.00" />
+          </div>
 
-        <label for="gross">Gross: </label>
-       </br>
-        <input readonly name="" id="gross" value="0.00"/> 
-      </br>
+          <div>
+            <label class="form-label" for="cgst">CGST: </label>
+            <input class="form-control" readonly id="cgst" value="₹ 0.00" />
+          </div>
 
-        <label for="cgst">CGST: </label> 
-      </br>
-        <input readonly name="" id="cgst" value="0.00"/> 
-      </br>
+          <div>
+            <label class="form-label" for="sgst">SGST: </label>
+            <input class="form-control" readonly id="sgst" value="₹ 0.00" />
+          </div>
 
-        <label for="sgst">SGST: </label> 
-      </br>
-        <input readonly name="" id="sgst" value="0.00"/> 
-      </br>
+          <div>
+            <label class="form-label" for="grand">Grand: </label>
+            <input class="form-control" readonly id="grand" value="₹ 0.00" />
+          </div>
 
-        <label for="grand">Grand: </label> 
-      </br>
-        <input readonly name="" id="grand" value="0.00"/> 
-      </br>
+          <div class="form-floating">
+            <textarea
+              readonly
+              class="form-control h-100 mt-4 mb-4"
+              rows="3"
+              placeholder="Leave a comment here"
+              id="amountInWords"
+            ></textarea>
+            <label for="floatingTextarea">Amounts in Words</label>
+          </div>
+        </div>
       </div>
     </form>
 
-
-    <!-- <script src="script.js"></script> -->
-    <script>
-    const rateElmRef = document.getElementById("rate");
-
-const quantityElmRef = document.getElementById("quantity");
-
-const gstRateElmRef = document.getElementById("gstRates");
-
-const grossElmRef = document.getElementById("gross");
-
-const cgstElmRef = document.getElementById("cgst");
-
-const sgstElmRef = document.getElementById("sgst");
-
-const grandElmRef = document.getElementById("grand");
-
-rateElmRef.addEventListener("focus", function (e) {
-  rateElmRef.style.backgroundColor = "cyan";
-
-  if (rateElmRef.value == "" || rateElmRef.value == "0.00") {
-    rateElmRef.value = "";
-  } else {
-    rateElmRef.value = rateElmRef.value;
-  }
-});
-
-quantityElmRef.addEventListener("focus", function (e) {
-  quantityElmRef.style.backgroundColor = "cyan";
-
-  if (quantityElmRef.value == "" || quantityElmRef.value == "0") {
-    quantityElmRef.value = "";
-  } else {
-    quantityElmRef.value = quantityElmRef.value;
-  }
-});
-
-rateElmRef.addEventListener("blur", function (e) {
-  rateElmRef.style.backgroundColor = "";
-  if (rateElmRef.value == "") {
-    rateElmRef.value = "0.00";
-  } else {
-    rateElmRef.value = rateElmRef.value;
-  }
-});
-
-quantityElmRef.addEventListener("blur", function (e) {
-  quantityElmRef.style.backgroundColor = "";
-  if (quantityElmRef.value == "") {
-    quantityElmRef.value = "0";
-  } else {
-    quantityElmRef.value = quantityElmRef.value;
-  }
-});
-
-rateElmRef.addEventListener("change", function (e) {
-  if (!isValid()) {
-    return;
-  }
-  claculateAll();
-});
-
-quantityElmRef.addEventListener("change", function (e) {
-  if (!isValid()) {
-    return;
-  }
-  claculateAll();
-});
-
-gstRateElmRef.addEventListener("change", function (e) {
-  if (!isValid()) {
-    return;
-  }
-  claculateAll();
-});
-
-rateElmRef.addEventListener("keyup", function (e) {
-  if (!isValid()) {
-    return;
-  }
-  claculateAll();
-});
-
-quantityElmRef.addEventListener("keyup", function (e) {
-  if (!isValid()) {
-    return;
-  }
-  claculateAll();
-});
-
-function claculateAll() {
-  let rate = parseFloat(rateElmRef.value);
-  let quantity = parseInt(quantityElmRef.value);
-  let gstRate = parseInt(
-    gstRateElmRef.options[gstRateElmRef.selectedIndex].value
-  );
-
-  const gross = calculateGross(rate, quantity);
-  const cgst = calculateCGST(gross, gstRate);
-  const sgst = calculateSGST(cgst);
-  const grand = calculateGrand(gross, cgst, sgst);
-}
-
-function calculateGross(rate, quantity) {
-  const gross = parseFloat(rate * quantity);
-  grossElmRef.value = +gross.toFixed(2);
-  return gross;
-}
-
-function calculateCGST(gross, gstRate) {
-  const CGST = parseFloat((gross * (gstRate / 2)) / 100);
-  cgstElmRef.value = +CGST.toFixed(2);
-  return CGST;
-}
-
-function calculateSGST(cgst) {
-  const SGST = parseFloat(cgst);
-  sgstElmRef.value = +SGST.toFixed(2);
-  return SGST;
-}
-
-function calculateGrand(gross, cgst, sgst) {
-  const grand = parseFloat(gross + cgst + sgst);
-  grandElmRef.value = +grand.toFixed(2);
-  return grand;
-}
-
-function isValid() {
-  const rate = parseInt(rateElmRef.value);
-  const quantity = parseInt(quantityElmRef.value);
-
-  if (isNaN(rate) || isNaN(quantity)) {
-    return false;
-  }
-  return true;
-}
-
-    </script>
+    <!-- Bootstrap JS CDN Link -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
