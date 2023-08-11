@@ -22,17 +22,17 @@
 
           <div>
             <label class="form-label" for="quantity">Quantity: </label>
-            <input class="form-control" type="number" id="quantity" value="0" />
+            <input class="form-control" type="number" id="quantity" value="0" onkeyup="calculateAll()" />
           </div>
 
           <div>
             <label class="form-label" for="rate">Rate: </label>
-            <input class="form-control" id="rate" type="number" value="0.00" />
+            <input class="form-control" id="rate" type="number" value="0.00" onkeyup="calculateAll()" />
           </div>
 
           <div>
             <label class="form-label" for="gstRates">GST Rate(%)</label>
-            <select class="form-select" name="gstRates" id="gstRates">
+            <select class="form-select" name="gstRates" id="gstRates" onchange="calculateAll()">
               <option value="0">0 %</option>
               <option selected value="5">5 %</option>
               <option value="12">12 %</option>
@@ -43,22 +43,22 @@
 
           <div>
             <label class="form-label" for="gross">Gross: </label>
-            <input class="form-control" readonly id="gross" value="₹ 0.00" />
+            <input class="form-control" readonly id="gross" value="₹0.00" />
           </div>
 
           <div>
             <label class="form-label" for="cgst">CGST: </label>
-            <input class="form-control" readonly id="cgst" value="₹ 0.00" />
+            <input class="form-control" readonly id="cgst" value="₹0.00" />
           </div>
 
           <div>
             <label class="form-label" for="sgst">SGST: </label>
-            <input class="form-control" readonly id="sgst" value="₹ 0.00" />
+            <input class="form-control" readonly id="sgst" value="₹0.00" />
           </div>
 
           <div>
             <label class="form-label" for="grand">Grand: </label>
-            <input class="form-control" readonly id="grand" value="₹ 0.00" />
+            <input class="form-control" readonly id="grand" value="₹0.00" />
           </div>
 
           <div class="form-floating">

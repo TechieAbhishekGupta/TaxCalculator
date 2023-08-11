@@ -32,7 +32,7 @@ quantityElmRef.addEventListener("focus", function (e) {
 
 rateElmRef.addEventListener("blur", function (e) {
   if (rateElmRef.value == "") {
-    rateElmRef.value = "₹ 0.00";
+    rateElmRef.value = "0.00";
   } else {
     rateElmRef.value = rateElmRef.value;
   }
@@ -46,44 +46,9 @@ quantityElmRef.addEventListener("blur", function (e) {
   }
 });
 
-rateElmRef.addEventListener("change", function (e) {
-  if (!isValid()) {
-    return;
-  }
-  claculateAll();
-});
-
-quantityElmRef.addEventListener("change", function (e) {
-  if (!isValid()) {
-    return;
-  }
-  claculateAll();
-});
-
-gstRateElmRef.addEventListener("change", function (e) {
-  if (!isValid()) {
-    return;
-  }
-  claculateAll();
-});
-
-rateElmRef.addEventListener("keyup", function (e) {
-  if (!isValid()) {
-    return;
-  }
-  claculateAll();
-});
-
-quantityElmRef.addEventListener("keyup", function (e) {
-  if (!isValid()) {
-    return;
-  }
-  claculateAll();
-});
-
-function claculateAll() {
-  let rate = parseFloat(rateElmRef.value);
-  let quantity = parseInt(quantityElmRef.value);
+function calculateAll() {
+  let rate = rateElmRef.value;
+  let quantity = quantityElmRef.value;
   let gstRate = parseInt(
     gstRateElmRef.options[gstRateElmRef.selectedIndex].value
   );
@@ -96,8 +61,8 @@ function claculateAll() {
 }
 
 function calculateGross(rate, quantity) {
-  const gross = parseFloat(rate * quantity);
-  grossElmRef.value = (+gross.toFixed(0)).toLocaleString("en-In", {
+  const gross = parseInt(rate * quantity);
+  grossElmRef.value = (+gross).toLocaleString("en-In", {
     style: "currency",
     currency: "INR",
   });
@@ -106,19 +71,19 @@ function calculateGross(rate, quantity) {
 
 function calculateCGST(gross, gstRate) {
   const CGST = parseFloat((gross * (gstRate / 2)) / 100);
-  cgstElmRef.value = (+CGST.toFixed(0)).toLocaleString("en-In", {
+  cgstElmRef.value = (+CGST.toFixed(1)).toLocaleString("en-In", {
     style: "currency",
     currency: "INR",
-  });;
+  });
   return CGST;
 }
 
 function calculateSGST(cgst) {
-  const SGST = parseFloat(cgst);
-  sgstElmRef.value = (+SGST.toFixed(0)).toLocaleString("en-In", {
+  const SGST = cgst;
+  sgstElmRef.value = (+SGST.toFixed(1)).toLocaleString("en-In", {
     style: "currency",
     currency: "INR",
-  });;
+  });
   return SGST;
 }
 
@@ -146,7 +111,7 @@ function showAmountInWords(amount) {
     }
 
     return convert_number(value) + " Rupee " + f_text + "Only...";
-  };
+  }
 
   function frac(f) {
     return f % 1;
@@ -239,14 +204,4 @@ function showAmountInWords(amount) {
 
   amountInWordsElmRef.value = amountInWords;
   return amountInWords;
-}
-
-function isValid() {
-  const rate = parseInt(rateElmRef.value);
-  const quantity = parseInt(quantityElmRef.value);
-
-  if (isNaN(rate) || isNaN(quantity)) {
-    return false;
-  }
-  return true;
 }
